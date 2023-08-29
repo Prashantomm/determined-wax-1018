@@ -2,15 +2,17 @@ package com.masai.entity;
 
 import java.time.LocalDate;
 
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
-
+@Entity
 public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +34,8 @@ public class Booking {
 
 	@Column(nullable = false)
 	private boolean isCancelled;
+	@OneToOne(mappedBy = "booking", cascade = CascadeType.ALL)
+	private Payment payment;
 
 	
 	
@@ -56,7 +60,7 @@ public class Booking {
 		
 	}
 
-// All getter and setter
+
 	public Long getBookingId() {
 		return bookingId;
 	}
@@ -117,18 +121,29 @@ public class Booking {
 	}
 
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public Payment getPayment() {
+		return payment;
+	}
 
 
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
+
+	public void printBookingsDetails() {
+		System.out.println("---------------------------------------------------------");
+		System.out.println("Booking ID: " + this.getBookingId());
+		System.out.println("Home ID: " + this.getHome().getHomeId());
+		System.out.println("Customer ID: " + this.getCustomer().getCustomerId());
+		System.out.println("Start Date: " + this.getStartDate());
+		System.out.println("End Date: " + this.getEndDate());
+		System.out.println("Is Cancelled: " + this.isCancelled());
+		if (this.getPayment() != null) {
+			System.out.println("Payment ID: " + this.getPayment().getPaymentId());
+		} else {
+			System.out.println("Payment: Pending");
+		}
+		System.out.println("---------------------------------------------------------");
+	}
 }

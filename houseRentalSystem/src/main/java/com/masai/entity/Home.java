@@ -45,7 +45,7 @@ public class Home {
 	
 	//parameterized constructor
 
-	public Home(String area, String type, double price, boolean availability, boolean isDeleted, Set<Booking> bookings
+	public Home(String area, String type, double price, boolean availability, boolean isDeleted
 			) {
 		super();
 		this.area = area;
@@ -53,7 +53,7 @@ public class Home {
 		this.price = price;
 		this.availability = availability;
 		this.isDeleted = isDeleted;
-		this.bookings = bookings;
+		
 		
 	}
 	

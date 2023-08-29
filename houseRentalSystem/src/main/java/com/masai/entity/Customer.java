@@ -48,7 +48,7 @@ public class Customer {
 	}
 	// Parameterized constructor
 	public Customer(String firstName, String lastName, String email, String phoneNumber, String username,
-			String password, boolean isDeleted, Set<Booking> bookings) {
+			String password) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -56,8 +56,7 @@ public class Customer {
 		this.phoneNumber = phoneNumber;
 		this.username = username;
 		this.password = password;
-		this.isDeleted = isDeleted;
-		this.bookings = bookings;
+		
 		
 	}
 // All getter setter

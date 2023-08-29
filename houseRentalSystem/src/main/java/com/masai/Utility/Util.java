@@ -8,11 +8,10 @@ public class Util {
 	static EntityManagerFactory emf = null;
 
 	static {
-		emf = Persistence.createEntityManagerFactory("houseRentingSystem");
+		emf = Persistence.createEntityManagerFactory("houseRenatalSystem");
 	}
 
 	public static EntityManager getEm() {
 		return emf.createEntityManager();
 	}
-
 }

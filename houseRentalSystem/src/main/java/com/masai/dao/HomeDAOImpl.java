@@ -70,11 +70,12 @@ public class HomeDAOImpl implements HomeDAO{
 
 	@Override
 	public Home addHome(Home home) throws SomethingWentWrongException {
-		EntityManager em = null;
-		EntityTransaction et = null;
+				EntityTransaction et = null;
 
-		try {
-			em = Util.getEm();
+		try(EntityManager em=Util.getEm()) {
+			
+
+			
 			et = em.getTransaction();
 
 			et.begin();
@@ -83,10 +84,9 @@ public class HomeDAOImpl implements HomeDAO{
 			return home;
 		} catch (Exception e) {
 			et.rollback();
+			e.printStackTrace();
 			throw new SomethingWentWrongException("Something went wrong while adding Details. Try again later.");
-		} finally {
-			em.close();
-		}
+		} 
 	}
 	
 
@@ -97,7 +97,7 @@ public class HomeDAOImpl implements HomeDAO{
 		try {
 			em = Util.getEm();
 			et = em.getTransaction();
-			Query query = em.createQuery("SELECT c FROM Car c");
+			Query query = em.createQuery("SELECT h FROM Home h");
 			et.begin();
 			List<Home> homelist = (List<Home>) query.getResultList();
 			if (homelist != null) {
@@ -146,10 +146,10 @@ public class HomeDAOImpl implements HomeDAO{
 		try {
 			em = Util.getEm();
 			Query query = em.createQuery("SELECT h FROM Home h WHERE h.area = :area");
-			query.setParameter("brand", area);
+			query.setParameter("area", area);
 			return query.getResultList();
 		} catch (Exception e) {
-			throw new SomethingWentWrongException("Something went wrong while fetching car details. Try again later.");
+			throw new SomethingWentWrongException("Something went wrong while fetching home details. Try again later.");
 		} finally {
 			em.close();
 
